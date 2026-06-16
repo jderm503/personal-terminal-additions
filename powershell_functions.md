@@ -1,0 +1,87 @@
+# rm -rf
+function rmrf {
+    param([Parameter(Mandatory=$true)][string]$path)
+
+    if (Test-Path $path) {
+        Remove-Item $path -Recurse -Force
+    } else {
+        Write-Host "rmrf: path not found -> $path"
+    }
+}
+
+# touch
+function touch {
+    param([Parameter(Mandatory=$true)][string]$filename)
+
+    if (Test-Path $filename) {
+        (Get-Item $filename).LastWriteTime = Get-Date
+    } else {
+        New-Item $filename -ItemType File | Out-Null
+    }
+}
+
+# pwd (Linux-style output)
+function pwd {
+    (Get-Location).Path
+}
+
+# ifconfig (simple passthrough)
+function ifconfig {
+    ipconfig
+}
+
+# file (GNU file via Scoop)
+function file {
+    & file.exe @args
+}
+
+# fast "find file by name" (uses ripgrep)
+function findf {
+    param([Parameter(Mandatory=$true)][string]$name)
+
+    rg --files -g "*$name*" C:\ 2>$null
+}
+
+# activate python venv
+function act {
+    .\vnv\Scripts\Activate.ps1
+}
+
+# zoxide (smart cd)
+Invoke-Expression (zoxide init powershell | Out-String)
+
+# zoxide ranking table
+function zrank {
+    zoxide query -l @args
+}
+
+# zoxide set location with interactive view
+function zi {
+    Set-Location (zoxide query -i)
+}
+
+# Replace PowerShell's built-in cat (Get-Content) with bat
+Remove-Item alias:cat -ErrorAction SilentlyContinue
+function cat {
+    & bat.exe @args
+}
+
+# less (pager)
+function less {
+    & less.exe @args
+}
+
+# btop (system monitor)
+function htop {
+    & btop.exe
+}
+
+# duf (disk usage)
+function duf {
+    & duf.exe
+}
+
+# fzf helper (interactive file finder)
+function fzf {
+    rg --files | fzf
+}
