@@ -1,0 +1,22 @@
+# ===== My custom config =====
+
+alias rmrf="rm -rf"
+alias htop="btop"
+alias act="source vnv/bin/activate"
+alias ifconfig="ip addr"
+
+function findf() {
+    rg --files -g "*$1*"
+}
+
+function ff() {
+    rg --files | fzf
+}
+
+function zi() {
+    cd "$(zoxide query -i)"
+}
+
+alias zrank="zoxide query -l"
+
+eval "$(zoxide init bash)"
