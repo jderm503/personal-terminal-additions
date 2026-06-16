@@ -12,6 +12,8 @@ Install necessary items with scoop: `scoop install file ripgrep zoxide bat less 
 
 Now do `. $PROFILE` and you're ready.
 
+================================
+
 FOR LINUX:
 
 `sudo apt update && sudo apt upgrade -y`
