@@ -3,7 +3,7 @@
 alias rmrf="rm -rf"
 alias htop="btop"
 alias act="source vnv/bin/activate"
-alias ifconfig="ip addr"
+alias mkvnv="python3 -m venv vnv"
 
 function findf() {
     rg --files -g "*$1*"
